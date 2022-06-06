@@ -20,7 +20,7 @@ public class AdoptionController {
     @Autowired
     private AdoptionMapper mapper;
 
-    @PostMapping("/api/adoptions")
+    @PostMapping("/api/adopt")
     @ResponseStatus(code = HttpStatus.CREATED)
     public AdoptionResponse create(@RequestBody AdoptionRequest adoptionRequest) {
         var adoption = mapper.toModel(adoptionRequest);

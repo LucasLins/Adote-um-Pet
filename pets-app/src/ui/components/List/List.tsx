@@ -6,6 +6,7 @@ import { Description, Info, ListItem, ListStyled, Name, Picture } from './List.s
 
 interface ListaProps {
   pets: Pet[];
+  onSelect: (pet: Pet) => void;
 }
 
 export default function List(props: ListaProps) {
@@ -20,7 +21,7 @@ export default function List(props: ListaProps) {
             <Description>
               {TextService.limitText(pet.story, textLimit)}
             </Description>
-            <Button variant="contained" fullWidth>
+            <Button variant="contained" fullWidth onClick={() => props.onSelect(pet)}>
               Adotar {pet.name}
             </Button>
           </Info>
