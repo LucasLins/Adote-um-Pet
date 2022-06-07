@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AdoptionResponse {
 
     private Long id;

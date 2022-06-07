@@ -1,35 +1,35 @@
 package br.com.pets.adoteumpet.api.pet.controller;
 
+import br.com.pets.adoteumpet.api.pet.dto.PetRequest;
 import br.com.pets.adoteumpet.api.pet.dto.PetResponse;
-import br.com.pets.adoteumpet.api.pet.mapper.PetMapper;
-import br.com.pets.adoteumpet.core.model.Pet;
-import br.com.pets.adoteumpet.core.repository.PetRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+
+import br.com.pets.adoteumpet.api.pet.service.PetService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/pets")
 public class PetController {
 
     @Autowired
-    private PetRepository repository;
+    private PetService petService;
 
-    @Autowired
-    private PetMapper mapper;
-
-    @GetMapping("/api/pets")
+    @GetMapping
     public List<PetResponse> findAll() {
-        var pets = repository.findAll();
-        var petResponses = new ArrayList<PetResponse>();
-        for (Pet pet : pets) {
-            petResponses.add(mapper.toResponse(pet));
-        }
-        return petResponses;
+        return petService.findAll();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public PetResponse create(@RequestBody @Valid PetRequest petRequest) {
+        return petService.create(petRequest);
     }
 
 }

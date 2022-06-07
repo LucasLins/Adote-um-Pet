@@ -15,17 +15,16 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Adoption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Positive(message = "Valor tem que ser positivo")
     @Column(nullable = false)
     private BigDecimal amount;
 
-    @Email(message = "Email inválido")
     @Column(nullable = false)
     private String email;
 

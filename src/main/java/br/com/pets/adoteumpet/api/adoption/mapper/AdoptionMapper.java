@@ -18,19 +18,34 @@ public class AdoptionMapper {
     private PetMapper petMapper;
 
     public Adoption toModel(AdoptionRequest adoptionRequest) {
+        /*
         var adoption = new Adoption();
         adoption.setEmail(adoptionRequest.getEmail());
         adoption.setAmount(adoptionRequest.getAmount());
         adoption.setPet(petRepository.findByIdOrElseThrow(adoptionRequest.getPetId()));
         return adoption;
+         */
+        return Adoption.builder()
+                .email(adoptionRequest.getEmail())
+                .amount(adoptionRequest.getAmount())
+                .pet(petRepository.findByIdOrElseThrow(adoptionRequest.getPetId()))
+                .build();
     }
 
-    public AdoptionResponse toResponse(Adoption adoption){
+    public AdoptionResponse toResponse(Adoption adoption) {
+        /*
         var adoptionResponse = new AdoptionResponse();
         adoptionResponse.setId(adoption.getId());
         adoptionResponse.setEmail(adoption.getEmail());
         adoptionResponse.setAmount(adoption.getAmount());
         adoptionResponse.setPet(petMapper.toResponse(adoption.getPet()));
         return adoptionResponse;
+         */
+        return AdoptionResponse.builder()
+                .id(adoption.getId())
+                .email(adoption.getEmail())
+                .amount(adoption.getAmount())
+                .pet(petMapper.toResponse(adoption.getPet()))
+                .build();
     }
 }
